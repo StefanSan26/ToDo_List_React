@@ -4,9 +4,7 @@ import './index.css';
 import App from './App';
 
 ReactDOM.render(
-    <App saludo='Buenas'>
-			<h3>  Esto es contenido del props.children</h3>
-		</App>	,
+    <App/>,
   document.getElementById('root')
 );
 
