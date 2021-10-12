@@ -19,32 +19,57 @@ import { AppUI } from "./AppUI";
 // ];
 
 function useLocalStorage(itemName,initialValue){
+	const [error, setError] = React.useState(false)
+	const [loading, setLoading] = React.useState(true)
+	const [item, setItem] = React.useState(initialValue)
 
-	const localStorageItem = localStorage.getItem(itemName)
-	let parsedItem
+	React.useEffect(()=>{
+		setTimeout(()=>{
+			try{
+				const localStorageItem = localStorage.getItem(itemName)
+			let parsedItem
+		
+			if (!localStorageItem) {
+				localStorage.setItem(itemName,JSON.stringify(initialValue))
+				parsedItem=initialValue
+			} else {
+				parsedItem = JSON.parse(localStorageItem)
+			}
 
-	if (!localStorageItem) {
-		localStorage.setItem(itemName,JSON.stringify(initialValue))
-		parsedItem=initialValue
-	} else {
-		parsedItem = JSON.parse(localStorageItem)
-	}
+			setItem(parsedItem)
+			setLoading(false)
+			}catch(error){
+				setError(error)
+			}
+		},1000)
+	})
 
-	const [item, setItem] = React.useState(parsedItem)
+
 
 	const saveItem = (newItem)=>{
-		const stringItem=JSON.stringify(newItem)
+		try{
+			const stringItem=JSON.stringify(newItem)
 		localStorage.setItem(itemName,stringItem)
 		setItem(newItem)
+		}catch(error){
+			setError(error)
+		}
 	}
-	return[
+	return{
 		item,
-		saveItem
-	]
+		saveItem,
+		loading,
+		error
+	}
 }
 
 function App() {
-	const [todos,saveTodos] = useLocalStorage('TODOS_V1',[])
+	const {
+		item:todos,
+		saveItem:saveTodos,
+		loading,
+		error
+	} = useLocalStorage('TODOS_V1',[])
 
 	const [searchValue,setSearchValue] = React.useState('')
 
@@ -81,9 +106,20 @@ function App() {
 		newTodos.splice(todoIndex,1)
 		saveTodos(newTodos)
 	}
+	// console.log('Render antes del UseEffect')
+	
+	// React.useEffect(()=>{
+	// 	console.log('use Effect')
+	// },[])
+
+
+	// console.log('Render despues del UseEffect')
+
 
   return (
     <AppUI 
+		loading={loading}
+		error={error}
 		totalTodos={totalTodos} 
 		completedTodos={completedTodos}
 		searchValue={searchValue} 
