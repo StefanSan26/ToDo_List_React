@@ -15,6 +15,7 @@ function TodoSearch() {
 		type="text" 
 		placeholder='Buscar tarea'
 		value={searchValue}
+		key={searchValue}
 		onChange={onSearchValueChange}
 		/>
 		]
