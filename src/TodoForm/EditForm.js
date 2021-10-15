@@ -6,18 +6,19 @@ function EditForm(){
 	const [newTodoValue, setNewTodoValue] = React.useState('')
 
 	const {
-		addTodo,
+		// addTodo,
 		setEdit,
-		editValue
+		editValue,
+		editTodo
 	} = React.useContext(TodoContext)
 
 	const onCancel=()=>{
-		addTodo(editValue)
+		// addTodo(editValue)
 		setEdit(false)
 	}
 	const onSubmit=(event)=>{
 		event.preventDefault()
-		addTodo(newTodoValue || editValue)
+		editTodo(newTodoValue || editValue)
 		setEdit(false)
 	}
 	const onChange=(event)=>{

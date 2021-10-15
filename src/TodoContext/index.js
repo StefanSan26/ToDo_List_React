@@ -16,6 +16,7 @@ function TodoProvider(props){
 	const [edit,setEdit]= React.useState(false)
 	// const [editModal,setEditModal]= React.useState(false)
 	const [editValue,setEditValue] = React.useState('')
+	const [ind,setInd] = React.useState(-1)
 
 	const completedTodos = todos.filter(todo => !!todo.completed).length
 	const totalTodos = todos.length
@@ -32,17 +33,12 @@ function TodoProvider(props){
 		})
 	}
 
-	// const editTodo = (todo)=>{
-	// 	const todoIndex = todos.findIndex(td => td===todo)
-	// 	console.log(todoIndex)
-
-	// }
-
 	const onEdit =(text) =>{
+		const todoIndex = todos.findIndex(todo => todo.text ===text)
+		setInd(todoIndex)
 		setEdit(true)
 		setEditValue(text)
-		//borrarlo 
-		deleteTodo(text)
+
 	}
 
 	const addTodo = (text) =>{
@@ -62,6 +58,16 @@ function TodoProvider(props){
 		}else {
 		newTodos[todoIndex].completed = true
 		}
+		saveTodos(newTodos)
+	}
+	const editTodo = (text) =>{
+		const newTodos = [...todos]
+
+			if(newTodos[ind]){
+				console.log(newTodos)
+			newTodos[ind].text = text
+		}
+		// }
 		saveTodos(newTodos)
 	}
 	const deleteTodo = (text) =>{
@@ -88,7 +94,8 @@ function TodoProvider(props){
 		onEdit,
 		setEdit,
 		setEditValue,
-		editValue
+		editValue,
+		editTodo,
 		}}>
 			{props.children}
 		</TodoContext.Provider>
