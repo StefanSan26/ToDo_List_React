@@ -7,7 +7,7 @@ function TodoSearch() {
  const {searchValue, setSearchValue} = React.useContext(TodoContext)
 
 	const onSearchValueChange=(event)=>{
-		console.log(event.target.value)
+		// console.log(event.target.value)
 		setSearchValue(event.target.value)
 	}
 	return[
@@ -15,7 +15,7 @@ function TodoSearch() {
 		type="text" 
 		placeholder='Buscar tarea'
 		value={searchValue}
-		key={searchValue}
+		key="{searchValue}"
 		onChange={onSearchValueChange}
 		/>
 		]

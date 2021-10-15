@@ -2,19 +2,23 @@ import React from 'react'
 import { TodoContext } from '../TodoContext'
 import './TodoForm.css'
 
-function TodoForm(){
+function EditForm(){
 	const [newTodoValue, setNewTodoValue] = React.useState('')
+
 	const {
 		addTodo,
-		setOpenModal
+		setEdit,
+		editValue
 	} = React.useContext(TodoContext)
+
 	const onCancel=()=>{
-		setOpenModal(false)
+		addTodo(editValue)
+		setEdit(false)
 	}
 	const onSubmit=(event)=>{
-		// event.preventDefault()
-		addTodo(newTodoValue)
-		setOpenModal(false)
+		event.preventDefault()
+		addTodo(newTodoValue || editValue)
+		setEdit(false)
 	}
 	const onChange=(event)=>{
 		setNewTodoValue(event.target.value)
@@ -22,22 +26,23 @@ function TodoForm(){
 
 	return (
 		<form onSubmit={onSubmit}>
-			<label>Escribe tu nuevo ToDo</label>
+			{/* <label>Escribe tu nuevo ToDo</label> */}
 			<textarea
-			value={newTodoValue}
+			value={newTodoValue || editValue}
 			onChange={onChange}
-			placeholder="Cortar la cebolla para el almuerzo"
-			/>
+			// placeholder="Cortar la cebolla para el almuerzo"
+			>
+			</textarea>	
 			<div className="TodoForm-buttonContainer">
 				<button type="button" onClick={onCancel} className="TodoForm-button TodoForm-button--cancel">
 					Cancelar
 				</button>
 				<button type="submit" className="TodoForm-button TodoForm-button--add">
-					Añadir
+					Editar
 				</button>
 			</div>
 		</form>
 	)
 }
 
-export {TodoForm}
+export {EditForm}

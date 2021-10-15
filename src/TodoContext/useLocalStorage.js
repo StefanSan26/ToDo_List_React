@@ -25,7 +25,7 @@ function useLocalStorage(itemName,initialValue){
 				setError(error)
 			}
 		},1000)
-	},[])
+	},[]) //Esto hace que solamente se ejecute una vez.En caso que no enviemos nada se renderiza cada vez que haya un cambi minimo. si enviamo algun argumento el effect va a estar mirando los cambios de este argumento
 
 
 
