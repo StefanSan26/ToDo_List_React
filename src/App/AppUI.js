@@ -8,6 +8,8 @@ import CreateTodoButton from "../CreateTodoButton";
 import { Modal } from "../Modal";
 import { TodoForm } from "../TodoForm";
 import { EditForm } from "../TodoForm/EditForm";
+import './App.css'
+import {EraseAllBtn} from "../EraseAllBtn"
 
 function AppUI() {
   const {
@@ -27,9 +29,9 @@ function AppUI() {
       <TodoCounter />
       <TodoSearch />
       <TodoList>
-        {error && <p>Desesperate, hubo un erro</p>}
-        {loading && <p>Estamos cargando, no desesperes</p>}
-        {!loading && !searchedTodo.length && <p>¡Crea tu primer ToDo!</p>}
+        {error && <p class="App-text">Desesperate, hubo un erro</p>}
+        {loading && <p class="App-text">Estamos cargando, no desesperes</p>}
+        {!loading && !searchedTodo.length && <p class="loading App-text">¡Crea tu primer ToDo!</p>}
         {searchedTodo.map((todo) => (
           <TodoItem
             key={todo.text}
@@ -51,6 +53,7 @@ function AppUI() {
           <TodoForm />
         </Modal>
       )}
+			<EraseAllBtn/>
       <CreateTodoButton
         // openModal={openModal}
         setOpenModal={setOpenModal}

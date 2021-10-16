@@ -49,7 +49,9 @@ function TodoProvider(props){
 		})
 		saveTodos(newTodos)
 	}
-
+	const eraseAll = ()=>{
+		saveTodos([])
+	}
 	const completeTodo = (text) =>{
 		const todoIndex = todos.findIndex(todo => todo.text ===text)
 		const newTodos = [...todos]
@@ -96,6 +98,7 @@ function TodoProvider(props){
 		setEditValue,
 		editValue,
 		editTodo,
+		eraseAll
 		}}>
 			{props.children}
 		</TodoContext.Provider>

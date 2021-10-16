@@ -1,0 +1,12 @@
+.eraseAllBtn{
+	background: transparent;
+	border:  none;
+	font-size: xxx-large;
+	position: fixed;
+	left: 20px;
+	bottom: 20px;
+}
+.eraseAllBtn:hover{
+	color: rgb(126, 26, 48);
+	cursor: pointer;
+}

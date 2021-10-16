@@ -1,6 +1,6 @@
 .TodoItem {
   /* background-color: #FAFAFA; */
-  width: calc(100% - 40px);
+  width: calc(100% - 10%);
   position: relative;
   display: flex;
   justify-content: center;
