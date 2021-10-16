@@ -15,7 +15,11 @@ This is my first project in React and i applied some insteresting utilities:
 - States
 - Effects
 - Context
+- Portals
 
-### URL
+### Links
 
-- [Todo List](https://stefansan26.github.io/curso_intro_react/)
+- [Todo List made in course](https://platzi.github.io/curso-intro-react/)
+
+- [My Todo List (Modified)](https://stefansan26.github.io/ToDo_List_React/)
+
