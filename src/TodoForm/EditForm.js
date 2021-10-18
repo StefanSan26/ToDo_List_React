@@ -1,16 +1,13 @@
 import React from 'react'
-import { TodoContext } from '../TodoContext'
 import './TodoForm.css'
 
-function EditForm(){
+function EditForm({
+	setEdit,
+	editValue,
+	editTodo
+} ){
 	const [newTodoValue, setNewTodoValue] = React.useState('')
 
-	const {
-		// addTodo,
-		setEdit,
-		editValue,
-		editTodo
-	} = React.useContext(TodoContext)
 
 	const onCancel=()=>{
 		// addTodo(editValue)
