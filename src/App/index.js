@@ -13,6 +13,7 @@ import { TodoForm } from "../TodoForm";
 import { EditForm } from "../TodoForm/EditForm";
 import './App.css'
 import {EraseAllBtn} from "../EraseAllBtn"
+import { EmptySearch } from "../EmptySearch";
 
 
 function App() {
@@ -47,10 +48,24 @@ function App() {
 			error={error}
 			loading={loading}
 			searchedTodos={searchedTodo}
+			totalTodos={totalTodos}
+			searchText={searchValue}
 			onError={()=><TodosError/>}
 			onLoading={()=><TodosLoading/>}
 			onEmptyTodos={()=><EmptyTodos/>}
-			render={(todo) => (
+			onEmptySearchResults={(searchText)=><EmptySearch searchText={searchText}/>}
+			// render={(todo) => (
+			// 	<TodoItem
+			// 		key={todo.text}
+			// 		text={todo.text}
+			// 		completed={todo.completed}
+			// 		onComplete={() => completeTodo(todo.text)}
+			// 		onDelete={() => deleteTodo(todo.text)}
+			// 		onEdit={()=>onEdit(todo.text)}
+			// 	/>
+			// )}
+		>
+			{(todo) => (
 				<TodoItem
 					key={todo.text}
 					text={todo.text}
@@ -60,22 +75,7 @@ function App() {
 					onEdit={()=>onEdit(todo.text)}
 				/>
 			)}
-		/>
-		{/* <TodoList>
-			{error && <p class="App-text">Desesperate, hubo un erro</p>}
-			{loading && <p class="App-text">Estamos cargando, no desesperes</p>}
-			{!loading && !searchedTodo.length && <p class="loading App-text">¡Crea tu primer ToDo!</p>}
-			{searchedTodo.map((todo) => (
-				<TodoItem
-					key={todo.text}
-					text={todo.text}
-					completed={todo.completed}
-					onComplete={() => completeTodo(todo.text)}
-					onDelete={() => deleteTodo(todo.text)}
-					onEdit={()=>onEdit(todo.text)}
-				/>
-			))}
-		</TodoList> */}
+		</TodoList>
 		{edit && (
 			<Modal>
 				<EditForm 
@@ -92,9 +92,7 @@ function App() {
 		)}
 		<EraseAllBtn eraseAll={eraseAll}/>
 		<CreateTodoButton
-			// openModal={openModal}
 			setOpenModal={setOpenModal}
-			// onClick = {()=>setOpenModal(true)} // Como Yo lo habria hecho
 		/>
 	</React.Fragment>
   );
