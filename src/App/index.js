@@ -4,6 +4,9 @@ import TodoCounter from "../TodoCounter";
 import TodoItem from "../TodoItem";
 import TodoList from "../TodoList";
 import TodoSearch from "../TodoSearch";
+import { TodosError } from '../TodosError';
+import { TodosLoading } from '../TodosLoading';
+import { EmptyTodos } from '../EmptyTodos';
 import CreateTodoButton from "../CreateTodoButton";
 import { Modal } from "../Modal";
 import { TodoForm } from "../TodoForm";
@@ -35,11 +38,30 @@ function App() {
   } = useTodos();
   return (
 		<React.Fragment>
+
 		<TodoCounter>
 		<h2 className="TodoCounter">Has completado {completedTodos} de {totalTodos} ToDos</h2>
 		</TodoCounter>
 		<TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
-		<TodoList>
+		<TodoList 
+			error={error}
+			loading={loading}
+			searchedTodos={searchedTodo}
+			onError={()=><TodosError/>}
+			onLoading={()=><TodosLoading/>}
+			onEmptyTodos={()=><EmptyTodos/>}
+			render={(todo) => (
+				<TodoItem
+					key={todo.text}
+					text={todo.text}
+					completed={todo.completed}
+					onComplete={() => completeTodo(todo.text)}
+					onDelete={() => deleteTodo(todo.text)}
+					onEdit={()=>onEdit(todo.text)}
+				/>
+			)}
+		/>
+		{/* <TodoList>
 			{error && <p class="App-text">Desesperate, hubo un erro</p>}
 			{loading && <p class="App-text">Estamos cargando, no desesperes</p>}
 			{!loading && !searchedTodo.length && <p class="loading App-text">¡Crea tu primer ToDo!</p>}
@@ -53,7 +75,7 @@ function App() {
 					onEdit={()=>onEdit(todo.text)}
 				/>
 			))}
-		</TodoList>
+		</TodoList> */}
 		{edit && (
 			<Modal>
 				<EditForm 
