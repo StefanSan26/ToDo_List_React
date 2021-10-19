@@ -3,10 +3,10 @@ import React from "react";
 import './TodoCounter.css'
 
 function TodoCounter(props){
-	// const {totalTodos, completedTodos} = React.useContext(TodoContext)
 	return(
-		// <h2 className="TodoCounter">Has completado {completedTodos} de {totalTodos} ToDos</h2>
-		<section>
+	<section>
+		<h2 className={`TodoCounter ${props.loading && 'TodoCounter--loading'}`}
+		>Has completado {props.completedTodos} de {props.totalTodos} ToDos</h2>
 		{props.children}
 		</section>
 	);

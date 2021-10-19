@@ -14,6 +14,7 @@ import { EditForm } from "../TodoForm/EditForm";
 import './App.css'
 import {EraseAllBtn} from "../EraseAllBtn"
 import { EmptySearch } from "../EmptySearch";
+import { TodoHeader } from "../TodoHeader";
 
 
 function App() {
@@ -39,11 +40,17 @@ function App() {
   } = useTodos();
   return (
 		<React.Fragment>
-
-		<TodoCounter>
-		<h2 className="TodoCounter">Has completado {completedTodos} de {totalTodos} ToDos</h2>
-		</TodoCounter>
-		<TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
+		<TodoHeader loading={loading} >
+			<TodoCounter
+			// loading={loading}
+			completedTodos={completedTodos}
+			totalTodos={totalTodos}
+			/>
+			<TodoSearch 
+			// loading={loading}
+			searchValue={searchValue} 
+			setSearchValue={setSearchValue}/>
+		</TodoHeader>
 		<TodoList 
 			error={error}
 			loading={loading}
