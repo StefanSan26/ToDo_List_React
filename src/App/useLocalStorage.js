@@ -3,6 +3,7 @@ import React from 'react'
 
 function useLocalStorage(itemName,initialValue){
 	const [error, setError] = React.useState(false)
+	const [sincronized, setSincronized] = React.useState(true)
 	const [loading, setLoading] = React.useState(true)
 	const [item, setItem] = React.useState(initialValue)
 
@@ -18,14 +19,15 @@ function useLocalStorage(itemName,initialValue){
 			} else {
 				parsedItem = JSON.parse(localStorageItem)
 			}
-
+			
 			setItem(parsedItem)
 			setLoading(false)
+			setSincronized(true)
 			}catch(error){
 				setError(error)
 			}
 		},1000)
-	},[]) //Esto hace que solamente se ejecute una vez.En caso que no enviemos nada se renderiza cada vez que haya un cambi minimo. si enviamo algun argumento el effect va a estar mirando los cambios de este argumento
+	},[sincronized]) //Esto hace que solamente se ejecute una vez.En caso que no enviemos nada se renderiza cada vez que haya un cambi minimo. si enviamo algun argumento el effect va a estar mirando los cambios de este argumento
 
 
 
@@ -38,11 +40,17 @@ function useLocalStorage(itemName,initialValue){
 			setError(error)
 		}
 	}
+
+	const sincronize=()=>{
+		setLoading(true)
+		setSincronized(false)
+	}
 	return{
 		item,
 		saveItem,
 		loading,
-		error
+		error,
+		sincronize
 	}
 }
 

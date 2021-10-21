@@ -13,6 +13,8 @@
 	background: #c1d3f7;
 	box-shadow:  -5px -5px 8px #5670a1,
 							5px 5px 8px #7498d9;
+	transition: 1s;
+
 }
 
 .TodoSearch::placeholder {

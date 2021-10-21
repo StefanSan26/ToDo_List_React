@@ -15,6 +15,7 @@ import './App.css'
 import {EraseAllBtn} from "../EraseAllBtn"
 import { EmptySearch } from "../EmptySearch";
 import { TodoHeader } from "../TodoHeader";
+import { ChangeAlertWhitStorageListener } from "../ChangeAlert";
 
 
 function App() {
@@ -36,7 +37,8 @@ function App() {
 		addTodo,
 		eraseAll,
 		searchValue, 
-		setSearchValue
+		setSearchValue,
+		sincronizeTodos
   } = useTodos();
   return (
 		<React.Fragment>
@@ -100,6 +102,9 @@ function App() {
 		<EraseAllBtn eraseAll={eraseAll}/>
 		<CreateTodoButton
 			setOpenModal={setOpenModal}
+		/>
+		<ChangeAlertWhitStorageListener
+		sincronize={sincronizeTodos}
 		/>
 	</React.Fragment>
   );

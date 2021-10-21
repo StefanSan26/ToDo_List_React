@@ -7,6 +7,7 @@ function useTodos(){
 		item:todos,
 		saveItem:saveTodos,
 		loading,
+		sincronize:sincronizeTodos,
 		error
 	} = useLocalStorage('TODOS_V1',[])
 
@@ -97,7 +98,8 @@ function useTodos(){
 		setEditValue,
 		editValue,
 		editTodo,
-		eraseAll
+		eraseAll,
+		sincronizeTodos
 		}
 			// {props.children}
 	)
